@@ -82,7 +82,7 @@ public class GameNetworkManager : NetworkManager
         {
             foreach (var item in networkPlayers)
             {
-                item.Value.UpdateUI(msg);
+                item.Value.UpdateUI(playerOne.playerMove, playerTwo.playerMove, msg);
             }
             msg = "";
         }

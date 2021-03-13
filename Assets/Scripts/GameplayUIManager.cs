@@ -1,17 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 public class GameplayUIManager : MonoBehaviour
 {
     static GameplayUIManager instance;
     [SerializeField] TextMeshProUGUI txt_playerName;
+    [SerializeField] TextMeshProUGUI txt_playerMove;
     [SerializeField] TextMeshProUGUI txt_oponentName;
+    [SerializeField] TextMeshProUGUI txt_oponentMove;
     [SerializeField] TextMeshProUGUI txt_msg;
     [SerializeField] GameObject gameOver;
     [SerializeField] GameObject playerActions;
 
+    bool isLocalPlayer;
     //Properties
     public static GameplayUIManager Instance => instance;
 
@@ -22,6 +23,7 @@ public class GameplayUIManager : MonoBehaviour
 
     public void SetName(string name, bool isMyPlayer)
     {
+        isLocalPlayer = isMyPlayer;
         if (isMyPlayer)
         {
             txt_playerName.text = name + ":";
@@ -29,6 +31,17 @@ public class GameplayUIManager : MonoBehaviour
         else
         {
             txt_oponentName.text = name + ":";
+        }
+    }
+    public void SetMoveUI(RPSType playerOneMove, RPSType playerTwoMove)
+    {
+        if (isLocalPlayer)
+        {
+            txt_playerMove.text = playerOneMove.ToString();
+        }
+        else
+        {
+            txt_oponentMove.text = playerTwoMove.ToString();
         }
     }
 

@@ -29,7 +29,6 @@ public class Player : NetworkBehaviour
     private void Start()
     {
         GameNetworkManager.singleton.AddPlayer(this);
-        playerMove = RPSType.None;
     }
 
     void SetPlayerName(string oldName, string newName)
@@ -67,9 +66,10 @@ public class Player : NetworkBehaviour
     }
 
     [TargetRpc]
-    public void UpdateUI(string msg)
+    public void UpdateUI(RPSType playerOneMove, RPSType playerTwoMove, string msg)
     {
         GameplayUIManager.Instance.SendMessage(msg);
+        GameplayUIManager.Instance.SetMoveUI(playerOneMove, playerTwoMove);
     }
 
 

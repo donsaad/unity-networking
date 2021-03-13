@@ -2301,7 +2301,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   txt_playerName: {fileID: 2063608280}
+  txt_playerMove: {fileID: 65512952}
   txt_oponentName: {fileID: 2975343}
+  txt_oponentMove: {fileID: 251521199}
   txt_msg: {fileID: 1809979903}
   gameOver: {fileID: 122886899}
   playerActions: {fileID: 483106510}
