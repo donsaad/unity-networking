@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using TMPro;
 using Mirror;
+using TMPro;
+using UnityEngine;
 
 namespace TopDown
 {
@@ -25,7 +23,7 @@ namespace TopDown
         [SyncVar(hook = nameof(OnNameUpdated))] string playerName;
         [SyncVar(hook = nameof(OnHealthUpdated))] float health;
 
-        
+
         [SyncVar] bool isAlive;
         void Start()
         {
@@ -82,7 +80,7 @@ namespace TopDown
         {
             if (!isServer)
             {
-                ShootBullet(startPos, fwd); 
+                ShootBullet(startPos, fwd);
             }
         }
 
@@ -109,7 +107,7 @@ namespace TopDown
                 }
             }
         }
-        
+
         public override void OnStopClient()
         {
             base.OnStopClient();
@@ -121,10 +119,10 @@ namespace TopDown
         {
             if (isAlive)
             {
-                health -= damage; // updates automatically with other players cause it's SyncVar
-                if (health < 0)
+                health -= damage;
+                if (health <= 0)
                 {
-                    // DIE
+                    isAlive = false;
                     RpcRip(killer);
                 }
             }
@@ -133,8 +131,8 @@ namespace TopDown
         [ClientRpc]
         public void RpcRip(uint killerId)
         {
-            isAlive = false;
             TopDownUIManager.Instance.ShowNotification($"[{playerName}] was killed by [{GameNetworkManager.singleton.NetworkPlayers[killerId].playerName}]");
+            GetComponent<Renderer>().material.color = Color.red;
         }
     }
 
