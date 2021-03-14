@@ -12,7 +12,6 @@ public class GameplayUIManager : MonoBehaviour
     [SerializeField] GameObject gameOver;
     [SerializeField] GameObject playerActions;
 
-    bool isLocalPlayer;
     //Properties
     public static GameplayUIManager Instance => instance;
 
@@ -23,7 +22,6 @@ public class GameplayUIManager : MonoBehaviour
 
     public void SetName(string name, bool isMyPlayer)
     {
-        isLocalPlayer = isMyPlayer;
         if (isMyPlayer)
         {
             txt_playerName.text = name + ":";
@@ -31,17 +29,6 @@ public class GameplayUIManager : MonoBehaviour
         else
         {
             txt_oponentName.text = name + ":";
-        }
-    }
-    public void SetMoveUI(RPSType playerOneMove, RPSType playerTwoMove)
-    {
-        if (isLocalPlayer)
-        {
-            txt_playerMove.text = playerOneMove.ToString();
-        }
-        else
-        {
-            txt_oponentMove.text = playerTwoMove.ToString();
         }
     }
 
@@ -53,12 +40,23 @@ public class GameplayUIManager : MonoBehaviour
     {
         GameNetworkManager.singleton.GetLocalPlayer().CmdSetReadyForReplay();
     }
-    public void SendMessage(string msg)
+    public void UpdateUIPanels(RPSType playerOneMove, RPSType playerTwoMove, string msg, bool hasAuthority)
     {
         gameOver.SetActive(true);
         playerActions.SetActive(false);
         txt_msg.SetText(msg);
-        SetMove(0);
+        if (hasAuthority)
+        {
+            txt_playerMove.text = playerOneMove.ToString();
+            txt_oponentMove.text = playerTwoMove.ToString();
+            Debug.Log("from if");
+        }
+        else
+        {
+            Debug.Log("else");
+            txt_playerMove.text = playerTwoMove.ToString();
+            txt_oponentMove.text = playerOneMove.ToString();
+        }
     }
     public void RestartGame()
     {
@@ -66,6 +64,8 @@ public class GameplayUIManager : MonoBehaviour
         {
             gameOver.SetActive(false);
             playerActions.SetActive(true);
+            txt_oponentMove.text = "***";
+            txt_playerMove.text = "***";
         }
     }
 }

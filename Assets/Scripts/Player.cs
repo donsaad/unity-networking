@@ -46,10 +46,6 @@ public class Player : NetworkBehaviour
     public void CmdSetMove(RPSType move)
     {
         playerMove = move;
-        if (move == RPSType.None)
-        {
-            SetNOTReadyForReplay();
-        }
         GameNetworkManager.singleton.CalculateResult();
     }
 
@@ -66,10 +62,9 @@ public class Player : NetworkBehaviour
     }
 
     [TargetRpc]
-    public void UpdateUI(RPSType playerOneMove, RPSType playerTwoMove, string msg)
+    public void RpcUpdateUI(RPSType playerOneMove, RPSType playerTwoMove, string msg, bool authFlag)
     {
-        GameplayUIManager.Instance.SendMessage(msg);
-        GameplayUIManager.Instance.SetMoveUI(playerOneMove, playerTwoMove);
+        GameplayUIManager.Instance.UpdateUIPanels(playerOneMove, playerTwoMove, msg, authFlag);
     }
 
 

@@ -65,11 +65,19 @@ public class GameNetworkManager : NetworkManager
         {
             return;
         }
-        if(playerOne.playerMove == playerTwo.playerMove)
+        else if(playerOne.playerMove == playerTwo.playerMove)
         {
             msg = "Tie";
         }
-        else if (playerOne.playerMove == RPSType.Paper && playerTwo.playerMove == RPSType.Rock)
+        else if (playerOne.playerMove == RPSType.Rock && playerTwo.playerMove == RPSType.Paper)
+        {
+            msg = $"{playerTwo.playerName} wins";
+        }
+        else if(playerOne.playerMove == RPSType.Rock && playerTwo.playerMove == RPSType.Scissors)
+        {
+            msg = $"{playerOne.playerName} wins";
+        }
+        else if(playerOne.playerMove == RPSType.Paper && playerTwo.playerMove == RPSType.Rock)
         {
             msg = $"{playerOne.playerName} wins";
         }
@@ -77,12 +85,25 @@ public class GameNetworkManager : NetworkManager
         {
             msg = $"{playerTwo.playerName} wins";
         }
+        else if(playerOne.playerMove == RPSType.Scissors && playerTwo.playerMove == RPSType.Rock)
+        {
+            msg = $"{playerTwo.playerName} wins";
+        }
+        else if(playerOne.playerMove == RPSType.Scissors && playerTwo.playerMove == RPSType.Paper)
+        {
+            msg = $"{playerOne.playerName} wins";
+        }
         //Send win and lose messages to the players then show players' moves
         if (msg.Length != 0)
         {
             foreach (var item in networkPlayers)
             {
-                item.Value.UpdateUI(playerOne.playerMove, playerTwo.playerMove, msg);
+                item.Value.RpcUpdateUI(playerOne.playerMove, playerTwo.playerMove, msg, item.Value.hasAuthority);
+                item.Value.SetNOTReadyForReplay();
+            }
+            foreach (var item in networkPlayers)
+            {
+                item.Value.playerMove = RPSType.None;
             }
             msg = "";
         }
