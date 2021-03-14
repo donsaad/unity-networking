@@ -5,10 +5,16 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MainMenu.unity
     guid: 2d912089eea707f419d12e98a8c14221
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Gameplay.unity
     guid: caf4ce1cee484fc48aee89fbf11a7e89
+  - enabled: 1
+    path: Assets/Mirror_TopDown/Scenes/MainMenuTopDown.unity
+    guid: 7b1f33aa61880584d97115a4ccb046ee
+  - enabled: 1
+    path: Assets/Mirror_TopDown/Scenes/GameplayTopDown.unity
+    guid: 940318c0ee64e2845b8bd06afaae0368
   m_configObjects: {}
