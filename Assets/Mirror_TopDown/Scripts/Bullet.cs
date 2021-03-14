@@ -7,16 +7,15 @@ namespace TopDown
     public class Bullet : MonoBehaviour
     {
         [SerializeField] float speed;
+        [SerializeField] float damage;
         Rigidbody rb;
 
-        // Start is called before the first frame update
         void Start()
         {
             rb = GetComponent<Rigidbody>();
             Destroy(gameObject, 3);
         }
 
-        // Update is called once per frame
         void Update()
         {
             rb.velocity = transform.forward * speed;
@@ -24,7 +23,11 @@ namespace TopDown
 
         private void OnTriggerEnter(Collider other)
         {
-            //Check for player and apply damage
+            if (other.CompareTag("Player"))
+            {
+                Player player = other.gameObject.GetComponent<Player>();
+                player.TakeDamage(damage, player.netId);
+            }
             Destroy(gameObject);
         }
     }

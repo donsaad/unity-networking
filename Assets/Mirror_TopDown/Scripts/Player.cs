@@ -25,7 +25,8 @@ namespace TopDown
         [SyncVar(hook = nameof(OnNameUpdated))] string playerName;
         [SyncVar(hook = nameof(OnHealthUpdated))] float health;
 
-        // Start is called before the first frame update
+        
+        [SyncVar] bool isAlive;
         void Start()
         {
             rb = GetComponent<Rigidbody>();
@@ -43,6 +44,7 @@ namespace TopDown
         {
             playerName = pName;
             health = maxHealth;
+            isAlive = true;
             UpdateUI();
         }
 
@@ -84,10 +86,9 @@ namespace TopDown
             }
         }
 
-        // Update is called once per frame
         void Update()
         {
-            if (isLocalPlayer)
+            if (isAlive && isLocalPlayer)
             {
                 float xMov = Input.GetAxis("Horizontal");
                 float yMov = Input.GetAxis("Vertical");
@@ -108,11 +109,32 @@ namespace TopDown
                 }
             }
         }
-
+        
         public override void OnStopClient()
         {
             base.OnStopClient();
             GameNetworkManager.singleton.RemovePlayer(netId);
+        }
+
+        [Server]
+        public void TakeDamage(float damage, uint killer)
+        {
+            if (isAlive)
+            {
+                health -= damage; // updates automatically with other players cause it's SyncVar
+                if (health < 0)
+                {
+                    // DIE
+                    RpcRip(killer);
+                }
+            }
+        }
+
+        [ClientRpc]
+        public void RpcRip(uint killerId)
+        {
+            isAlive = false;
+            TopDownUIManager.Instance.ShowNotification($"[{playerName}] was killed by [{GameNetworkManager.singleton.NetworkPlayers[killerId].playerName}]");
         }
     }
 

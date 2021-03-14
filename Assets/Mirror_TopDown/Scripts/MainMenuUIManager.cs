@@ -11,7 +11,6 @@ namespace TopDown
         [SerializeField] TMP_InputField if_playerName;
         [SerializeField] Button[] connectionButtons;
 
-        // Start is called before the first frame update
         void Start()
         {
             ValidateName();
