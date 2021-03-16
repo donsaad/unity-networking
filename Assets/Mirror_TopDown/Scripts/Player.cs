@@ -66,6 +66,7 @@ namespace TopDown
         {
             GameObject go = Instantiate(bulletPrefab, startPos, Quaternion.identity);
             go.transform.forward = bulletFwd;
+            go.GetComponent<Bullet>().ownerNetId = netId;
         }
 
         [Command]

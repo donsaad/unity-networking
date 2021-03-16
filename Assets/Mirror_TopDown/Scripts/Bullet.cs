@@ -7,7 +7,7 @@ namespace TopDown
         [SerializeField] float speed;
         [SerializeField] float damage;
         Rigidbody rb;
-
+        public uint ownerNetId;
         void Start()
         {
             rb = GetComponent<Rigidbody>();
@@ -24,7 +24,7 @@ namespace TopDown
             if (other.CompareTag("Player"))
             {
                 Player player = other.gameObject.GetComponent<Player>();
-                player.TakeDamage(damage, player.netId);
+                player.TakeDamage(damage, ownerNetId);
             }
             Destroy(gameObject);
         }
