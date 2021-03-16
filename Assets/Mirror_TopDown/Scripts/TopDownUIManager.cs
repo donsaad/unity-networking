@@ -2,7 +2,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 
-namespace TopDown
+namespace MirrorTopDown
 {
     public class TopDownUIManager : MonoBehaviour
     {

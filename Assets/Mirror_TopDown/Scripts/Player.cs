@@ -2,7 +2,7 @@ using Mirror;
 using TMPro;
 using UnityEngine;
 
-namespace TopDown
+namespace MirrorTopDown
 {
     public class Player : NetworkBehaviour
     {

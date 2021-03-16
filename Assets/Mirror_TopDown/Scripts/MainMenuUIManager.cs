@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-namespace TopDown
+namespace MirrorTopDown
 {
     public class MainMenuUIManager : MonoBehaviour
     {

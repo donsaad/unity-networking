@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Mirror;
 
-namespace TopDown
+namespace MirrorTopDown
 {
     public class GameNetworkManager : NetworkManager
     {

@@ -1,19 +1,22 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-namespace MirrorTopDown
+namespace PUN_TopDown
 {
     public class Bullet : MonoBehaviour
     {
         [SerializeField] float speed;
-        [SerializeField] float damage;
         Rigidbody rb;
-        public uint ownerNetId;
+
+        // Start is called before the first frame update
         void Start()
         {
             rb = GetComponent<Rigidbody>();
             Destroy(gameObject, 3);
         }
 
+        // Update is called once per frame
         void Update()
         {
             rb.velocity = transform.forward * speed;
@@ -21,11 +24,7 @@ namespace MirrorTopDown
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Player"))
-            {
-                Player player = other.gameObject.GetComponent<Player>();
-                player.TakeDamage(damage, ownerNetId);
-            }
+            //Check for player and apply damage
             Destroy(gameObject);
         }
     }
