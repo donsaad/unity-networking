@@ -37,12 +37,6 @@ namespace PUN_TopDown
             }
         }
 
-        // Start is called before the first frame update
-        void Start()
-        {
-
-        }
-
         public void ConnectToServer()
         {
             PhotonNetwork.AutomaticallySyncScene = true;
@@ -83,7 +77,7 @@ namespace PUN_TopDown
         public override void OnConnectedToMaster()
         {
             base.OnConnectedToMaster();
-            LogMessage("Connected to game server");
+            LogMessage("Connected to game server.");
             NM_onConnected?.Invoke();
         }
 
@@ -96,10 +90,10 @@ namespace PUN_TopDown
         public override void OnJoinedRoom()
         {
             base.OnJoinedRoom();
-            LogMessage("Room Joined: " + PhotonNetwork.CurrentRoom.Name);
+            LogMessage("Joined Room: " + PhotonNetwork.CurrentRoom.Name + " with " + PhotonNetwork.CurrentRoom.PlayerCount + " players");
         }
 
-        public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
+        public override void OnPlayerEnteredRoom(Player newPlayer)
         {
             base.OnPlayerEnteredRoom(newPlayer);
             LogMessage(newPlayer.NickName + " entered the room");

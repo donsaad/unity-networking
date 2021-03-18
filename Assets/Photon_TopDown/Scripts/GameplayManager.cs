@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using Photon.Pun;
+using UnityEngine;
 
 namespace PUN_TopDown
 {
@@ -10,7 +8,7 @@ namespace PUN_TopDown
         [SerializeField] Transform[] spawningPositions;
         [SerializeField] string playerPrefab;
 
-        // Start is called before the first frame update
+
         void Start()
         {
             Transform pTransform = spawningPositions[(PhotonNetwork.LocalPlayer.ActorNumber - 1) % spawningPositions.Length];

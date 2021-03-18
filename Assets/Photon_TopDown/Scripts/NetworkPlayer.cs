@@ -25,7 +25,7 @@ namespace PUN_TopDown
         string playerName;
         float health;
 
-        // Start is called before the first frame update
+
         void Start()
         {
             txt_playerName.text = photonView.Owner.NickName;
@@ -49,7 +49,7 @@ namespace PUN_TopDown
             Instantiate(bulletPrefab, shootingPos.position, shootingPos.rotation);
         }
 
-        // Update is called once per frame
+
         void Update()
         {
             if (photonView.IsMine)

@@ -378,8 +378,7 @@ MonoBehaviour:
   cannonRotSpeed: 3.5
   cannonPivot: {fileID: 1389147502748797447}
   shootingPos: {fileID: 5004153652220527369}
-  bulletPrefab: {fileID: 6943910207501050027, guid: a48df76c47e3d0f4db576c89b1beb1c3,
-    type: 3}
+  bulletPrefab: {fileID: 6943910207501050027, guid: a48df76c47e3d0f4db576c89b1beb1c3, type: 3}
   txt_playerName: {fileID: 8406291534858199881}
   healthBar: {fileID: 1593657058260789544}
   maxHealth: 100

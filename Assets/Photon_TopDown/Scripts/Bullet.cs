@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace PUN_TopDown
@@ -9,14 +7,12 @@ namespace PUN_TopDown
         [SerializeField] float speed;
         Rigidbody rb;
 
-        // Start is called before the first frame update
         void Start()
         {
             rb = GetComponent<Rigidbody>();
             Destroy(gameObject, 3);
         }
 
-        // Update is called once per frame
         void Update()
         {
             rb.velocity = transform.forward * speed;
