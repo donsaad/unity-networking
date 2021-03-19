@@ -42,12 +42,19 @@ namespace PUN_TopDown
             PhotonNetwork.AutomaticallySyncScene = true;
             PhotonNetwork.GameVersion = gameVersion;
             PhotonNetwork.ConnectUsingSettings();
+            // TODO: check for available rooms
         }
 
         public void SetPlayerName(string pName)
         {
             PhotonNetwork.NickName = pName;
         }
+
+        public void SetPlayerColor(string pName)
+        {
+            //PhotonNetwork.LocalPlayer.CustomProperties. = pName;
+        }
+
 
         public void CreateRoom(string roomName)
         {
@@ -91,12 +98,16 @@ namespace PUN_TopDown
         {
             base.OnJoinedRoom();
             LogMessage("Joined Room: " + PhotonNetwork.CurrentRoom.Name + " with " + PhotonNetwork.CurrentRoom.PlayerCount + " players");
+            PunUIManager.Instance.SetStartGameButton();
+            PunUIManager.Instance.DisplayColorPicker();
         }
 
         public override void OnPlayerEnteredRoom(Player newPlayer)
         {
-            base.OnPlayerEnteredRoom(newPlayer);
+         //   base.OnPlayerEnteredRoom(newPlayer);
             LogMessage(newPlayer.NickName + " entered the room");
+            PunUIManager.Instance.photonView.RPC(nameof(UpdatePlayersListUI), RpcTarget.All);
+            //    photonView.RPC(nameof(UpdatePlayersListUI), RpcTarget.All);
         }
 
         #endregion
@@ -104,6 +115,36 @@ namespace PUN_TopDown
         public void LogMessage(string msg)
         {
             txt_log.text = msg + '\n' + txt_log.text;
+        }
+        [PunRPC]
+        public void UpdatePlayersListUI()
+        {
+            string res = "Players in Room:\n";
+            foreach (var player in PhotonNetwork.PlayerList)
+            {
+                res += player.NickName + "\n";
+            }
+            PunUIManager.Instance.UpdatePlayersList(res);
+        }
+
+        public string GetPlayersListAsString()
+        {
+            string res = "Players in Room:\n";
+            foreach (var player in PhotonNetwork.PlayerList)
+            {
+                res += player.NickName + "\n";
+            }
+            return res;
+            //  PunUIManager.Instance.UpdatePlayersList(res);
+        }
+
+        public bool IsHost()
+        {
+            return PhotonNetwork.IsMasterClient;
+        }
+        public byte GetCurrentPlayersCount()
+        {
+            return PhotonNetwork.CurrentRoom.PlayerCount;
         }
     }
 }

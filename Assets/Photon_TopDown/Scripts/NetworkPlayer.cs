@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using TMPro;
 using Photon.Pun;
+using TMPro;
+using UnityEngine;
 
 namespace PUN_TopDown
 {
@@ -49,7 +47,6 @@ namespace PUN_TopDown
             Instantiate(bulletPrefab, shootingPos.position, shootingPos.rotation);
         }
 
-
         void Update()
         {
             if (photonView.IsMine)
@@ -60,7 +57,7 @@ namespace PUN_TopDown
 
                 if (Input.GetKey(KeyCode.RightArrow))
                 {
-                    cannonPivot.RotateAround(transform.up, cannonRotSpeed * Time.deltaTime);
+                    cannonPivot.Rotate(transform.up, cannonRotSpeed * Time.deltaTime);
                 }
                 else if (Input.GetKey(KeyCode.LeftArrow))
                 {
