@@ -20,7 +20,6 @@ namespace PUN_TopDown
             GameNetworkManager.Instance.NM_OnConnected += OnConnectedToMaster;
             connectionPanel.SetActive(true);
             lobbyPanel.SetActive(false);
-            txtPlayerList.enabled = false;
         }
 
         public void ConnectToMaster()
@@ -68,7 +67,6 @@ namespace PUN_TopDown
         {
             connectionPanel.SetActive(false);
             lobbyPanel.SetActive(true);
-            txtPlayerList.enabled = true;
         }
 
         private void OnDestroy()

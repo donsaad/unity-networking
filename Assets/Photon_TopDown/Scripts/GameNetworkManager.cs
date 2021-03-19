@@ -43,6 +43,9 @@ namespace PUN_TopDown
             PhotonNetwork.GameVersion = gameVersion;
             PhotonNetwork.ConnectUsingSettings();
             // TODO: check for available rooms
+            /*if (PhotonNetwork.CountOfRooms > 0)
+            {
+            }*/
         }
 
         public void SetPlayerName(string pName)
@@ -52,7 +55,7 @@ namespace PUN_TopDown
 
         public void SetPlayerColor(string pName)
         {
-            //PhotonNetwork.LocalPlayer.CustomProperties. = pName;
+           // PhotonNetwork.SetPlayerCustomProperties();
         }
 
 
@@ -96,18 +99,16 @@ namespace PUN_TopDown
 
         public override void OnJoinedRoom()
         {
-            base.OnJoinedRoom();
             LogMessage("Joined Room: " + PhotonNetwork.CurrentRoom.Name + " with " + PhotonNetwork.CurrentRoom.PlayerCount + " players");
             PunUIManager.Instance.SetStartGameButton();
             PunUIManager.Instance.DisplayColorPicker();
+            PunUIManager.Instance.photonView.RPC(nameof(PunUIManager.UpdatePlayersList), RpcTarget.All);
         }
 
         public override void OnPlayerEnteredRoom(Player newPlayer)
         {
-         //   base.OnPlayerEnteredRoom(newPlayer);
             LogMessage(newPlayer.NickName + " entered the room");
             PunUIManager.Instance.photonView.RPC(nameof(PunUIManager.UpdatePlayersList), RpcTarget.All);
-            //    photonView.RPC(nameof(UpdatePlayersListUI), RpcTarget.All);
         }
 
         #endregion
@@ -123,7 +124,6 @@ namespace PUN_TopDown
             {
                 res += player.NickName + "\n";
             }
-        //    PunUIManager.Instance.UpdatePlayersList(res);
         }
 
         public string GetPlayersListAsString()
@@ -134,7 +134,6 @@ namespace PUN_TopDown
                 res += player.NickName + "\n";
             }
             return res;
-            //  PunUIManager.Instance.UpdatePlayersList(res);
         }
 
         public bool IsHost()

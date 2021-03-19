@@ -57,7 +57,7 @@ namespace PUN_TopDown
 
                 if (Input.GetKey(KeyCode.RightArrow))
                 {
-                    cannonPivot.Rotate(transform.up, cannonRotSpeed * Time.deltaTime);
+                    cannonPivot.RotateAround(transform.up, cannonRotSpeed * Time.deltaTime);
                 }
                 else if (Input.GetKey(KeyCode.LeftArrow))
                 {

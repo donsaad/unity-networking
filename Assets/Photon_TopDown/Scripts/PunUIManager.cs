@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace PUN_TopDown
 {
-    public class PunUIManager : MonoBehaviourPunCallbacks
+    public class PunUIManager : MonoBehaviourPun
     {
 
         [SerializeField]
