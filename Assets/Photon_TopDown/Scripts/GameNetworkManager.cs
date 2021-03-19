@@ -106,7 +106,7 @@ namespace PUN_TopDown
         {
          //   base.OnPlayerEnteredRoom(newPlayer);
             LogMessage(newPlayer.NickName + " entered the room");
-            PunUIManager.Instance.photonView.RPC(nameof(UpdatePlayersListUI), RpcTarget.All);
+            PunUIManager.Instance.photonView.RPC(nameof(PunUIManager.UpdatePlayersList), RpcTarget.All);
             //    photonView.RPC(nameof(UpdatePlayersListUI), RpcTarget.All);
         }
 
@@ -116,7 +116,6 @@ namespace PUN_TopDown
         {
             txt_log.text = msg + '\n' + txt_log.text;
         }
-        [PunRPC]
         public void UpdatePlayersListUI()
         {
             string res = "Players in Room:\n";
@@ -124,7 +123,7 @@ namespace PUN_TopDown
             {
                 res += player.NickName + "\n";
             }
-            PunUIManager.Instance.UpdatePlayersList(res);
+        //    PunUIManager.Instance.UpdatePlayersList(res);
         }
 
         public string GetPlayersListAsString()

@@ -29,10 +29,10 @@ namespace PUN_TopDown
             }
             txtPlayerList.text = "";
         }
-
-        public void UpdatePlayersList(string playersText)
+        [PunRPC]
+        public void UpdatePlayersList()
         {
-            txtPlayerList.text = playersText;
+            txtPlayerList.text = GameNetworkManager.Instance.GetPlayersListAsString();
         }
         public void SetStartGameButton()
         {
