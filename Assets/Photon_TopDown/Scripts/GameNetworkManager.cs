@@ -55,7 +55,7 @@ namespace PUN_TopDown
 
         public void SetPlayerColor(string pName)
         {
-           // PhotonNetwork.SetPlayerCustomProperties();
+            // PhotonNetwork.SetPlayerCustomProperties();
         }
 
 
@@ -116,14 +116,6 @@ namespace PUN_TopDown
         public void LogMessage(string msg)
         {
             txt_log.text = msg + '\n' + txt_log.text;
-        }
-        public void UpdatePlayersListUI()
-        {
-            string res = "Players in Room:\n";
-            foreach (var player in PhotonNetwork.PlayerList)
-            {
-                res += player.NickName + "\n";
-            }
         }
 
         public string GetPlayersListAsString()
