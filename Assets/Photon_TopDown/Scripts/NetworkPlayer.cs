@@ -32,6 +32,7 @@ namespace PUN_TopDown
                 rb = GetComponent<Rigidbody>();
                 health = maxHealth;
 
+                Debug.Log("local color: " + PhotonNetwork.LocalPlayer.CustomProperties["colorkey"].ToString());
                 //UpdateUI();
             }
         }

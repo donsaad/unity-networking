@@ -84,7 +84,21 @@ namespace PUN_TopDown
                 }
                 else
                 {
-                    //TODO: GameNetworkManager.Instance.SetPlayerColor()
+                    switch (i)
+                    {
+                        case 0:
+                            GameNetworkManager.Instance.SetPlayerColor("Red");
+                            break;
+                        case 1:
+                            GameNetworkManager.Instance.SetPlayerColor("Green");
+                            break;
+                        case 2:
+                            GameNetworkManager.Instance.SetPlayerColor("Blue");
+                            break;
+                        case 3:
+                            GameNetworkManager.Instance.SetPlayerColor("Cyan");
+                            break;
+                    }
                 }
             }
             readyButton.interactable = true;

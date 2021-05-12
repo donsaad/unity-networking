@@ -1,10 +1,9 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
+using ExitGames.Client.Photon;
 
 namespace PUN_TopDown
 {
@@ -53,9 +52,12 @@ namespace PUN_TopDown
             PhotonNetwork.NickName = pName;
         }
 
-        public void SetPlayerColor(string pName)
+        public void SetPlayerColor(string pColor)
         {
             // PhotonNetwork.SetPlayerCustomProperties();
+            Hashtable hashtable = new Hashtable();
+            hashtable.Add("colorkey", pColor);
+            PhotonNetwork.SetPlayerCustomProperties(hashtable);
         }
 
 

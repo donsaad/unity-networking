@@ -13,6 +13,7 @@ namespace PUN_TopDown
         {
             Transform pTransform = spawningPositions[(PhotonNetwork.LocalPlayer.ActorNumber - 1) % spawningPositions.Length];
             PhotonNetwork.Instantiate(playerPrefab, pTransform.position, pTransform.rotation);
+            Debug.Log(PhotonNetwork.LocalPlayer.NickName + PhotonNetwork.LocalPlayer.CustomProperties["colorkey"].ToString());
         }
     }
 
